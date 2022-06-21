@@ -16,7 +16,7 @@ public class Calculation {
 		return x - y;
 	}
 	private double divide(double x, double y) {
-		return x * y;
+		return x / y;
 	}
 	private double times(double x, double y) {
 		return x * y;
@@ -82,7 +82,7 @@ public class Calculation {
 								calculatedNumber = times(Double.parseDouble(previousNum), Double.parseDouble(pppNum));
 							}
 							else {
-								calculatedNumber = divide(Double.parseDouble(previousNum), Double.parseDouble(pppNum));
+								calculatedNumber = divide(Double.parseDouble(pppNum), Double.parseDouble(previousNum));
 							}
 							previousNum = calculatedNumber+"";
 							stack.push(previousNum);
@@ -104,7 +104,7 @@ public class Calculation {
 			String currentNum = null, currnetOpearator = null ;
 			currnetOpearator = stack.pop();
 			currentNum = stack.pop();
-			
+			System.out.println(currentNum);
 			
 			switch(currnetOpearator) {
 				case "+": value = add(Double.parseDouble(currentNum), value);
@@ -119,7 +119,8 @@ public class Calculation {
 					break;
 			}
 		}
-		answer = value+"";
+		
+		answer = value +"";
 		stack.clear();
 		return answer;
 	}

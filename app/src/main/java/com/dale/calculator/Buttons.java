@@ -30,6 +30,7 @@ public class Buttons extends JButton{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					CalculatorGUI.calculateText = null;
+					CalculatorGUI.calculateText = "";
 					CalculatorGUI.textFieldForInput.setText(CalculatorGUI.calculateText);
 					CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
 				}
@@ -50,16 +51,25 @@ public class Buttons extends JButton{
 						CalculatorGUI.textFieldForInput.setText(temp);
 						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
 						
-						CalculatorGUI.calculateText =  null;
-						CalculatorGUI.analyzerText =  null;
+						CalculatorGUI.calculateText =  "";
+						CalculatorGUI.analyzerText =  "";
 					}
 				}
 			};
 			this.addActionListener(listener);
 		}
-//		else if (elements.equals("\\+")) {
-//			
-//		}
+		else if (elements.equals(".")) {
+			String temp = CalculatorGUI.textFieldForInput.getText();
+			if(CalculatorGUI.calculateText.isEmpty()) {
+				CalculatorGUI.textFieldForInput.append("0" + elements);
+			}
+			
+			else if (!temp.contains(".")){
+				temp += ".";
+				CalculatorGUI.textFieldForInput.setText(temp);
+			}
+			
+		}
 		else if(!elements.equals("0")) {
 			
 			ActionListener listener =new ActionListener() {
