@@ -1,14 +1,24 @@
 package com.dale.calculator;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class CalculatorGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private int mainWidth = 400;
 	private int mainHeight = 680;
 	final private String TITLE = "Caculator";
+	static JTextArea textFieldForInput = new JTextArea();
+	
+	static JTextField textFieldForTemporary =new JTextField();
 	
 	JFrame jFrame = new JFrame(TITLE);
 	Buttons [] btn = new Buttons [20];
@@ -21,20 +31,31 @@ public class CalculatorGUI extends JFrame{
 		Panel resultPrintPanel =  new Panel();
 		Panel additionalButtonsPanel = new Panel();
 		Panel arithmeticOperationsButtonsPanel =  new Panel();
-				
+		TitledBorder border = new TitledBorder(new LineBorder(Color.black));
+
 		numberButtonsPanel.setLayout(null);
 		resultPrintPanel.setLayout(null);
 		additionalButtonsPanel.setLayout(null);
 		arithmeticOperationsButtonsPanel.setLayout(null);
 		
+		
+		
+		textFieldForInput.setBounds(0, 50, mainWidth, 100);
+		Font font = new Font("", Font.BOLD, 70);
+		textFieldForInput.setFont(font);
+		textFieldForInput.setBorder(border);
+//		textFieldForInput.setHorizontalAlignment(JTextField.RIGHT);
+//		textFieldForInput.setBounds(0, 50, mainWidth, 100);
+		textFieldForTemporary.setBounds(0,0, mainWidth, 50);
+		textFieldForTemporary.setEnabled(false);
+		
+		
 		btn[0] = new Buttons(0+"");
 		btn[0].setBounds(0, 300, Buttons.buttonWidht*2, Buttons.buttonheight);
 		numberButtonsPanel.add(btn[0]);
 		for(int i = 9; i >= 1; i--) {
-			btn[i] = new Buttons(i+"");
-			
+			btn[i] = new Buttons(i+"", x, y);
 			numberButtonsPanel.add(btn[i]);
-			btn[i].setBounds(x, y, Buttons.buttonWidht, Buttons.buttonheight);
 			
 			if((i-1) %3 ==0) {
 				x = 200;
@@ -43,18 +64,42 @@ public class CalculatorGUI extends JFrame{
 			else {
 				x -= 100;
 			}
-		}		
+		}
+		
+		
 		btn[10] = new Buttons(".");
 		btn[10].setBounds(200, 300, Buttons.buttonWidht, Buttons.buttonheight);
 		numberButtonsPanel.add(btn[10]);
-		
+		//Number Buttons 
+
 		btn[11] = new Buttons("+");
 		btn[11].setBounds(0,0, Buttons.buttonWidht, Buttons.buttonheight);
 		arithmeticOperationsButtonsPanel.add(btn[11]);
-//		btn[12] = new Buttons("-");
-//		btn[13] = new Buttons("*");
-//		btn[14] = new Buttons("/");
-//		btn[15] = new Buttons("=");
+		btn[12] = new Buttons("-");
+		btn[12].setBounds(0,100, Buttons.buttonWidht, Buttons.buttonheight);
+		arithmeticOperationsButtonsPanel.add(btn[12]);
+		btn[13] = new Buttons("*");
+		btn[13].setBounds(0,200, Buttons.buttonWidht, Buttons.buttonheight);
+		arithmeticOperationsButtonsPanel.add(btn[13]);
+		btn[14] = new Buttons("/");
+		btn[14].setBounds(0,300, Buttons.buttonWidht, Buttons.buttonheight);
+		arithmeticOperationsButtonsPanel.add(btn[14]);
+		btn[15] = new Buttons("=");
+		btn[15].setBounds(0,400, Buttons.buttonWidht, Buttons.buttonheight);
+		arithmeticOperationsButtonsPanel.add(btn[15]);
+		//Arithmetic Operations Buttons
+		
+		btn[16] = new Buttons("AC");
+		btn[16].setBounds(0,0, Buttons.buttonWidht, Buttons.buttonheight);
+		additionalButtonsPanel.add(btn[16]);
+		btn[17] = new Buttons("+/-");
+		btn[17].setBounds(100,0, Buttons.buttonWidht, Buttons.buttonheight);
+		additionalButtonsPanel.add(btn[17]);
+		btn[18] = new Buttons("%");
+		btn[18].setBounds(200,0, Buttons.buttonWidht, Buttons.buttonheight);
+		additionalButtonsPanel.add(btn[18]);
+		//Additional buttons 
+		
 		
 		
 		numberButtonsPanel.setBounds( 0, 250, mainWidth/4*3, 400);
@@ -74,6 +119,8 @@ public class CalculatorGUI extends JFrame{
 		mainContainer.add(resultPrintPanel);
 		mainContainer.add(additionalButtonsPanel);
 		mainContainer.add(arithmeticOperationsButtonsPanel);
+		resultPrintPanel.add(textFieldForInput);
+		resultPrintPanel.add(textFieldForTemporary);
 		
 		//프레임 크기 지정	
 		jFrame.setSize(mainWidth, mainHeight);
