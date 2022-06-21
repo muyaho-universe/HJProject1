@@ -45,6 +45,7 @@ public class CalculatorGUI extends JFrame{
 		Font font = new Font("", Font.BOLD, 30);
 		textFieldForInput.setFont(font);
 		textFieldForInput.setBorder(border);
+		textFieldForInput.setEnabled(false);
 
 		textFieldForTemporary.setBounds(0,0, mainWidth, 50);
 		textFieldForTemporary.setEnabled(false);
