@@ -18,7 +18,7 @@ public class CalculatorGUI extends JFrame{
 	final private String TITLE = "Caculator";
 	static JTextArea textFieldForInput = new JTextArea();
 	static String calculateText = new String ();
-	
+	static String analyzerText = new String ();
 	static JTextField textFieldForTemporary =new JTextField();
 	
 	JFrame jFrame = new JFrame(TITLE);

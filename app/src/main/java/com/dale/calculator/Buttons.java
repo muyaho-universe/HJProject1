@@ -29,8 +29,8 @@ public class Buttons extends JButton{
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					CalculatorGUI.calculateText = "";
-					CalculatorGUI.textFieldForInput.setText("");
+					CalculatorGUI.calculateText = null;
+					CalculatorGUI.textFieldForInput.setText(CalculatorGUI.calculateText);
 					CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
 				}
 			};
@@ -41,20 +41,33 @@ public class Buttons extends JButton{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if((CalculatorGUI.calculateText.isEmpty())|| (!CalculatorGUI.textFieldForInput.getText().equals(""))) {
-						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText()+elements;
-						CalculatorGUI.textFieldForInput.setText("");
+						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText();
+						CalculatorGUI.analyzerText +=  CalculatorGUI.textFieldForInput.getText();
+						Calculation calculation = new Calculation(CalculatorGUI.analyzerText);
+						String temp = calculation.calculation();
+						
+						CalculatorGUI.calculateText += "=";
+						CalculatorGUI.textFieldForInput.setText(temp);
 						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
+						
+						CalculatorGUI.calculateText =  null;
+						CalculatorGUI.analyzerText =  null;
 					}
 				}
 			};
 			this.addActionListener(listener);
 		}
+//		else if (elements.equals("\\+")) {
+//			
+//		}
 		else if(!elements.equals("0")) {
+			
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if((CalculatorGUI.calculateText.isEmpty())|| (!CalculatorGUI.textFieldForInput.getText().equals(""))) {
 						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText()+elements;
+						CalculatorGUI.analyzerText +=  CalculatorGUI.textFieldForInput.getText()+","+elements+",";
 						CalculatorGUI.textFieldForInput.setText("");
 						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
 					}
@@ -83,7 +96,7 @@ public class Buttons extends JButton{
 		ActionListener listener =new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CalculatorGUI.textFieldForInput.append(String.valueOf(Integer.valueOf(elements)));
+				CalculatorGUI.textFieldForInput.append(elements);
 			}
 		};
 		this.addActionListener(listener);
