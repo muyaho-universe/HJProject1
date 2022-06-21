@@ -17,6 +17,7 @@ public class CalculatorGUI extends JFrame{
 	private int mainHeight = 680;
 	final private String TITLE = "Caculator";
 	static JTextArea textFieldForInput = new JTextArea();
+	static String calculateText = new String ();
 	
 	static JTextField textFieldForTemporary =new JTextField();
 	
@@ -41,11 +42,10 @@ public class CalculatorGUI extends JFrame{
 		
 		
 		textFieldForInput.setBounds(0, 50, mainWidth, 100);
-		Font font = new Font("", Font.BOLD, 70);
+		Font font = new Font("", Font.BOLD, 30);
 		textFieldForInput.setFont(font);
 		textFieldForInput.setBorder(border);
-//		textFieldForInput.setHorizontalAlignment(JTextField.RIGHT);
-//		textFieldForInput.setBounds(0, 50, mainWidth, 100);
+
 		textFieldForTemporary.setBounds(0,0, mainWidth, 50);
 		textFieldForTemporary.setEnabled(false);
 		

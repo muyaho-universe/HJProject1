@@ -16,6 +16,64 @@ public class Buttons extends JButton{
 
 	public Buttons(String elements) {
 		super(elements);
+		
+		
+		if(elements.equals("+/-")) {
+			
+		}
+		
+		else if(elements.equals("%")) {
+			
+		}
+		else if(elements.equals("AC")) {
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					CalculatorGUI.calculateText = "";
+					CalculatorGUI.textFieldForInput.setText("");
+					CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
+				}
+			};
+			this.addActionListener(listener);
+		}
+		else if (elements.equals("=")) {
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if((CalculatorGUI.calculateText.isEmpty())|| (!CalculatorGUI.textFieldForInput.getText().equals(""))) {
+						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText()+elements;
+						CalculatorGUI.textFieldForInput.setText("");
+						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
+					}
+				}
+			};
+			this.addActionListener(listener);
+		}
+		else if(!elements.equals("0")) {
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if((CalculatorGUI.calculateText.isEmpty())|| (!CalculatorGUI.textFieldForInput.getText().equals(""))) {
+						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText()+elements;
+						CalculatorGUI.textFieldForInput.setText("");
+						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
+					}
+				}
+			};
+			this.addActionListener(listener);
+		}
+		else {
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if((!CalculatorGUI.textFieldForInput.getText().equals(""))){
+						CalculatorGUI.textFieldForInput.append(String.valueOf(elements));
+					}
+				}
+			};
+			this.addActionListener(listener);
+		}
+		
 	}
 	
 	public Buttons(String elements, int x, int y) {
@@ -26,7 +84,6 @@ public class Buttons extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CalculatorGUI.textFieldForInput.append(String.valueOf(Integer.valueOf(elements)));
-//				CalculatorGUI.textFieldForTemporary.append(CalculatorGUI.textFieldForInput.getText() + " ");
 			}
 		};
 		this.addActionListener(listener);
