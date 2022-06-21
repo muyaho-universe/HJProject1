@@ -60,14 +60,18 @@ public class Buttons extends JButton{
 		}
 		else if (elements.equals(".")) {
 			String temp = CalculatorGUI.textFieldForInput.getText();
-			if(CalculatorGUI.calculateText.isEmpty()) {
-				CalculatorGUI.textFieldForInput.append("0" + elements);
+			if((CalculatorGUI.textFieldForTemporary.getText().length() != 0)) {
+				if((CalculatorGUI.textFieldForInput.getText().length() == 0)) {
+					String temp1 = "0" + elements;
+					CalculatorGUI.textFieldForInput.setText(temp1);
+				}
+				
+				else if (!temp.contains(".")){
+					temp += ".";
+					CalculatorGUI.textFieldForInput.setText(temp);
+				}
 			}
 			
-			else if (!temp.contains(".")){
-				temp += ".";
-				CalculatorGUI.textFieldForInput.setText(temp);
-			}
 			
 		}
 		else if(!elements.equals("0")) {
