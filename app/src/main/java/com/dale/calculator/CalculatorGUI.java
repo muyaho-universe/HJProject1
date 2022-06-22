@@ -98,7 +98,7 @@ public class CalculatorGUI extends JFrame{
 		btn[17] = new Buttons("+/-");
 		btn[17].setBounds(100,0, Buttons.buttonWidht, Buttons.buttonheight);
 		additionalButtonsPanel.add(btn[17]);
-		btn[18] = new Buttons("%");
+		btn[18] = new Buttons("<-");
 		btn[18].setBounds(200,0, Buttons.buttonWidht, Buttons.buttonheight);
 		additionalButtonsPanel.add(btn[18]);
 		//Additional buttons 
@@ -114,7 +114,7 @@ public class CalculatorGUI extends JFrame{
 		additionalButtonsPanel.setBounds( 0, 150, mainWidth/4*3, 100);
 		
 		
-		arithmeticOperationsButtonsPanel.setBounds( 300, 150, mainWidth/4, mainHeight -150);
+		arithmeticOperationsButtonsPanel.setBounds( 300, 150, mainWidth/4+20, mainHeight -150);
 		
 		
 		mainContainer.setLayout(null);

@@ -1,5 +1,6 @@
 package com.dale.calculator;
 
+import java.math.BigDecimal;
 import java.util.Stack;
 
 public class Calculation {
@@ -10,22 +11,34 @@ public class Calculation {
 	private int size;
 	
 	private double add(double x, double y) {
-		return x + y;
+		BigDecimal bigDecimalX = BigDecimal.valueOf(x);
+		BigDecimal bigDecimalY = BigDecimal.valueOf(y);
+		BigDecimal bigDecimal = bigDecimalX.add(bigDecimalY);
+		double double_bigNum = bigDecimal.doubleValue();
+		
+		return double_bigNum;
 	}
 	private double subtract(double x, double y) {
-		return x - y;
+		BigDecimal bigDecimalX = BigDecimal.valueOf(x);
+		BigDecimal bigDecimalY = BigDecimal.valueOf(y);
+		BigDecimal bigDecimal = bigDecimalX.subtract(bigDecimalY);
+		double double_bigNum = bigDecimal.doubleValue();
+		return double_bigNum;
 	}
-	private double divide(double x, double y) {
-		double z = 0.0;
-		try {
-			z = x /y;
-		} catch (ArithmeticException e) {
-			e.printStackTrace();
-		}
-		return z;
+	private double divide(double x, double y) throws ArithmeticException{
+		BigDecimal bigDecimalX = BigDecimal.valueOf(x);
+		BigDecimal bigDecimalY = BigDecimal.valueOf(y);
+		BigDecimal bigDecimal = bigDecimalX.divide(bigDecimalY);
+		double double_bigNum = bigDecimal.doubleValue();
+		
+		return double_bigNum;
 	}
 	private double times(double x, double y) {
-		return x * y;
+		BigDecimal bigDecimalX = BigDecimal.valueOf(x);
+		BigDecimal bigDecimalY = BigDecimal.valueOf(y);
+		BigDecimal bigDecimal = bigDecimalX.multiply(bigDecimalY);
+		double double_bigNum = bigDecimal.doubleValue();
+		return double_bigNum;
 	}
 	
 	private boolean isNum(String t) {

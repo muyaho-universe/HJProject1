@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import java.awt.event.*;
+import java.math.BigDecimal;
 
 public class Buttons extends JButton{
 	static int buttonWidht = 100;
@@ -35,8 +36,16 @@ public class Buttons extends JButton{
 			this.addActionListener(listener);
 		}
 		
-		else if(elements.equals("%")) {
+		else if(elements.equals("<-")) {
 			this.setBackground(new Color(224, 224, 224));
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					CalculatorGUI.temporaryTextForInput  = CalculatorGUI.temporaryTextForInput.substring(0, CalculatorGUI.temporaryTextForInput.length()-1);
+					CalculatorGUI.textFieldForInput.setText(CalculatorGUI.temporaryTextForInput);
+				}
+			};
+			this.addActionListener(listener);
 		}
 		else if(elements.equals("AC")) {
 			this.setBackground(new Color(224, 224, 224));
@@ -45,6 +54,7 @@ public class Buttons extends JButton{
 				public void actionPerformed(ActionEvent e) {
 					CalculatorGUI.calculateText = null;
 					CalculatorGUI.calculateText = "";
+					CalculatorGUI.temporaryTextForInput  = "";
 					CalculatorGUI.textFieldForInput.setText(CalculatorGUI.calculateText);
 					CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
 				}
@@ -63,6 +73,7 @@ public class Buttons extends JButton{
 						String temp = calculation.calculation();
 						CalculatorGUI.temporaryTextForInput ="";
 						CalculatorGUI.calculateText += "=";
+						
 						CalculatorGUI.textFieldForInput.setText(temp);
 						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
 						
@@ -82,11 +93,13 @@ public class Buttons extends JButton{
 					String temp = CalculatorGUI.textFieldForInput.getText();
 					if((CalculatorGUI.textFieldForInput.getText().length() == 0)) {
 						String temp1 = "0" + elements;
+						CalculatorGUI.temporaryTextForInput = temp;
 						CalculatorGUI.textFieldForInput.setText(temp1);
 					}
 					
 					else if (!temp.contains(".")){
 						temp += ".";
+						CalculatorGUI.temporaryTextForInput = temp;
 						CalculatorGUI.textFieldForInput.setText(temp);
 					}	
 				}
@@ -137,6 +150,7 @@ public class Buttons extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(CalculatorGUI.textFieldForInput.getText().equals("0")) {
+					CalculatorGUI.temporaryTextForInput = elements;
 					CalculatorGUI.textFieldForInput.setText(elements);
 				}
 				else {
