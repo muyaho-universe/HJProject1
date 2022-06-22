@@ -36,7 +36,7 @@ public class Buttons extends JButton{
 			this.addActionListener(listener);
 		}
 		
-		else if(elements.equals("<-")) {
+		else if(elements.equals("ก็")) {
 			this.setBackground(new Color(224, 224, 224));
 			ActionListener listener =new ActionListener() {
 				@Override
@@ -105,10 +105,7 @@ public class Buttons extends JButton{
 				}
 			};
 			this.addActionListener(listener);
-			
-			
-			
-			
+					
 		}
 		else if(!elements.equals("0")) {
 			this.setBackground(new Color(233, 151, 72));
