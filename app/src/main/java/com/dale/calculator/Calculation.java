@@ -66,28 +66,35 @@ public class Calculation {
 			
 			else {
 				if(getPrecedence(temp) == 1) {
-					while(true) {
+					Stack<String> operatorStack = new Stack<>();
+					Stack<String> operandStack = new Stack<>();
+					do {
 						String previousNum = stack.pop();
 						String previousOperator = stack.pop();
+						double value = Double.parseDouble(previousNum);
 						if(getPrecedence(previousOperator) == 1 || getPrecedence(previousOperator) == 0) {
-							stack.push(previousOperator);
+							while(!operatorStack.empty()) {
+								stack.push(previousOperator);
+								String pppNum = operandStack.pop();
+								String pppOperator = operatorStack.pop();
+								switch(pppOperator) {
+									case "*": value = times(value, Double.parseDouble(pppNum));
+										break;
+									default: value = divide(value, Double.parseDouble(pppNum));
+								}
+								
+							}
+							previousNum = value+"";
 							stack.push(previousNum);
-							
 							break;
 						}
 						else {
-							String pppNum = stack.pop();
-							double calculatedNumber;
-							if(previousOperator.equals("*")) {
-								calculatedNumber = times(Double.parseDouble(previousNum), Double.parseDouble(pppNum));
-							}
-							else {
-								calculatedNumber = divide(Double.parseDouble(pppNum), Double.parseDouble(previousNum));
-							}
-							previousNum = calculatedNumber+"";
-							stack.push(previousNum);
+							operatorStack.push(previousOperator);
+							operandStack.push(previousNum);
 						}
-					}
+					}while(true);
+					
+					
 					stack.push(temp);
 				}
 				if(getPrecedence(temp) == 2) {

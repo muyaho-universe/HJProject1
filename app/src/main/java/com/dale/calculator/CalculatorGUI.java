@@ -123,13 +123,11 @@ public class CalculatorGUI extends JFrame{
 		resultPrintPanel.add(textFieldForInput);
 		resultPrintPanel.add(textFieldForTemporary);
 		
-		//프레임 크기 지정	
+		
 		jFrame.setSize(mainWidth, mainHeight);
 
-		//프레임 보이기
 		jFrame.setVisible(true);
 
-		//swing에만 있는 X버튼 클릭시 종료
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		jFrame.setResizable(false);

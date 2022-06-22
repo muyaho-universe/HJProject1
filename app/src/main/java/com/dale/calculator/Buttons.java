@@ -19,13 +19,14 @@ public class Buttons extends JButton{
 		
 		
 		if(elements.equals("+/-")) {
-			
+			this.setBackground(new Color(224, 224, 224));
 		}
 		
 		else if(elements.equals("%")) {
-			
+			this.setBackground(new Color(224, 224, 224));
 		}
 		else if(elements.equals("AC")) {
+			this.setBackground(new Color(224, 224, 224));
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -38,6 +39,7 @@ public class Buttons extends JButton{
 			this.addActionListener(listener);
 		}
 		else if (elements.equals("=")) {
+			this.setBackground(new Color(233, 151, 72));
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -59,6 +61,7 @@ public class Buttons extends JButton{
 			this.addActionListener(listener);
 		}
 		else if (elements.equals(".")) {
+			this.setBackground(new Color(224, 224, 224));
 			String temp = CalculatorGUI.textFieldForInput.getText();
 			if((CalculatorGUI.textFieldForTemporary.getText().length() != 0)) {
 				if((CalculatorGUI.textFieldForInput.getText().length() == 0)) {
@@ -75,7 +78,7 @@ public class Buttons extends JButton{
 			
 		}
 		else if(!elements.equals("0")) {
-			
+			this.setBackground(new Color(233, 151, 72));
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -90,6 +93,7 @@ public class Buttons extends JButton{
 			this.addActionListener(listener);
 		}
 		else {
+			this.setBackground(new Color(224, 224, 224));
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -106,7 +110,7 @@ public class Buttons extends JButton{
 	public Buttons(String elements, int x, int y) {
 		super(elements);
 		this.setBounds(x, y, Buttons.buttonWidht, Buttons.buttonheight);
-		this.setBackground(Color.BLACK);
+		this.setBackground(new Color(224, 224, 224));
 		ActionListener listener =new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
