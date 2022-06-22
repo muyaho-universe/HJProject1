@@ -3,6 +3,10 @@ package com.dale.calculator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -11,7 +15,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class CalculatorGUI extends JFrame{
+public class CalculatorGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private int mainWidth = 400;
 	private int mainHeight = 680;
@@ -26,6 +30,8 @@ public class CalculatorGUI extends JFrame{
 	Buttons [] btn = new Buttons [20];
 	
 	public void createFrame() {
+				
+		
 		int x = 200, y =0;
 		jFrame.setLayout(null);
 		Container mainContainer = jFrame.getContentPane();
@@ -135,4 +141,7 @@ public class CalculatorGUI extends JFrame{
 		CalculatorGUI frameExam = new CalculatorGUI();
 		frameExam.createFrame();
 	}
+
+
+	
 }
