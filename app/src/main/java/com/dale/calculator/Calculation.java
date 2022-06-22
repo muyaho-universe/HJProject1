@@ -162,9 +162,11 @@ public class Calculation {
 		
 		while(!stack.peek().equals("$")){
 			String temp =stack.peek();
+			
 			System.out.println(temp);
 			if(isNum(temp)) {
 				System.out.println("num in peeking!" + temp);
+				stack.pop();
 				otherStack.push(temp);
 			}
 			
@@ -175,8 +177,8 @@ public class Calculation {
 					String previousNum = null;
 					String previousOperator = null;
 					while(true) {
-						previousNum = stack.pop();
-						previousOperator = stack.pop();
+						previousNum = otherStack.pop();
+						previousOperator = otherStack.pop();
 						System.out.println("previousNum: "+previousNum + " previousOperator: " + previousOperator + " getPrecedence(previousOperator): " + getPrecedence(previousOperator));
 						double value = Double.parseDouble(previousNum);
 						if(getPrecedence(previousOperator) == 1 ) {
@@ -186,9 +188,9 @@ public class Calculation {
 								String pppNum = operandStack.pop();
 								String pppOperator = operatorStack.pop();
 								switch(pppOperator) {
-									case "*": value = times(value, Double.parseDouble(pppNum));
+									case "*": value = times(Double.parseDouble(pppNum), value);
 										break;
-									default: value = divide(value, Double.parseDouble(pppNum));
+									default: value = divide(Double.parseDouble(pppNum), value);
 										break;
 								}
 								
@@ -206,9 +208,9 @@ public class Calculation {
 								String pppNum = operandStack.pop();
 								String pppOperator = operatorStack.pop();
 								switch(pppOperator) {
-									case "*": value = times(value, Double.parseDouble(pppNum));
+									case "*": value = times(Double.parseDouble(pppNum), value );
 										break;
-									default: value = divide(value, Double.parseDouble(pppNum));
+									default: value = divide(Double.parseDouble(pppNum), value );
 										break;
 								}
 								
@@ -226,13 +228,17 @@ public class Calculation {
 						}
 					
 					}
+					
+					
 					otherStack.push(temp);
 				}
 				if(getPrecedence(temp) == 2) {
+					
 					otherStack.push(temp);
 				}
+				stack.pop();
 			}
-			otherStack.push(temp);
+			
 		}
 		String previousNum = otherStack.pop();
 		System.out.println("www" + previousNum);

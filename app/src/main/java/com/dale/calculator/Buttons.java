@@ -26,10 +26,12 @@ public class Buttons extends JButton{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(CalculatorGUI.textFieldForInput.getText().contains("-")) {
-						CalculatorGUI.textFieldForInput.setText(CalculatorGUI.textFieldForInput.getText().substring(1,CalculatorGUI.textFieldForInput.getText().length()));
+						CalculatorGUI.temporaryTextForInput = CalculatorGUI.textFieldForInput.getText().substring(1,CalculatorGUI.textFieldForInput.getText().length());
+						CalculatorGUI.textFieldForInput.setText(CalculatorGUI.temporaryTextForInput);
 					}
 					else {
-						CalculatorGUI.textFieldForInput.setText("-" + CalculatorGUI.textFieldForInput.getText());
+						CalculatorGUI.temporaryTextForInput = "-" + CalculatorGUI.textFieldForInput.getText();
+						CalculatorGUI.textFieldForInput.setText(CalculatorGUI.temporaryTextForInput);
 					}
 				}
 			};
@@ -107,12 +109,29 @@ public class Buttons extends JButton{
 			this.addActionListener(listener);
 					
 		}
+		else if(elements.equals("/")) {
+			this.setBackground(new Color(233, 151, 72));
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					if((!CalculatorGUI.temporaryTextForInput.equals("-")) &&((CalculatorGUI.calculateText.isEmpty())|| (!CalculatorGUI.textFieldForInput.getText().equals("")))&&(Double.parseDouble(CalculatorGUI.temporaryTextForInput) != 0)) {
+						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText()+elements;
+						CalculatorGUI.analyzerText +=  CalculatorGUI.textFieldForInput.getText()+","+elements+",";
+						CalculatorGUI.textFieldForInput.setText("");
+						CalculatorGUI.temporaryTextForInput ="";
+						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
+					}
+				}
+			};
+			this.addActionListener(listener);
+		}
 		else if(!elements.equals("0")) {
 			this.setBackground(new Color(233, 151, 72));
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if((CalculatorGUI.calculateText.isEmpty())|| (!CalculatorGUI.textFieldForInput.getText().equals(""))) {
+					if((!CalculatorGUI.temporaryTextForInput.equals("-"))&&((CalculatorGUI.calculateText.isEmpty())|| (!CalculatorGUI.textFieldForInput.getText().equals("")))) {
 						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText()+elements;
 						CalculatorGUI.analyzerText +=  CalculatorGUI.textFieldForInput.getText()+","+elements+",";
 						CalculatorGUI.textFieldForInput.setText("");
@@ -146,6 +165,7 @@ public class Buttons extends JButton{
 		ActionListener listener =new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				if(CalculatorGUI.textFieldForInput.getText().equals("0")) {
 					CalculatorGUI.temporaryTextForInput = elements;
 					CalculatorGUI.textFieldForInput.setText(elements);
