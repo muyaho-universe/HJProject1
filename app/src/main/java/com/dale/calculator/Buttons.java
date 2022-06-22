@@ -2,6 +2,7 @@ package com.dale.calculator;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +21,18 @@ public class Buttons extends JButton{
 		
 		if(elements.equals("+/-")) {
 			this.setBackground(new Color(224, 224, 224));
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(CalculatorGUI.textFieldForInput.getText().contains("-")) {
+						CalculatorGUI.textFieldForInput.setText(CalculatorGUI.textFieldForInput.getText().substring(1,CalculatorGUI.textFieldForInput.getText().length()));
+					}
+					else {
+						CalculatorGUI.textFieldForInput.setText("-" + CalculatorGUI.textFieldForInput.getText());
+					}
+				}
+			};
+			this.addActionListener(listener);
 		}
 		
 		else if(elements.equals("%")) {
@@ -48,7 +61,7 @@ public class Buttons extends JButton{
 						CalculatorGUI.analyzerText +=  CalculatorGUI.textFieldForInput.getText();
 						Calculation calculation = new Calculation(CalculatorGUI.analyzerText);
 						String temp = calculation.calculation();
-						
+						CalculatorGUI.temporaryTextForInput ="";
 						CalculatorGUI.calculateText += "=";
 						CalculatorGUI.textFieldForInput.setText(temp);
 						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
@@ -62,18 +75,25 @@ public class Buttons extends JButton{
 		}
 		else if (elements.equals(".")) {
 			this.setBackground(new Color(224, 224, 224));
-			String temp = CalculatorGUI.textFieldForInput.getText();
-			if((CalculatorGUI.textFieldForTemporary.getText().length() != 0)) {
-				if((CalculatorGUI.textFieldForInput.getText().length() == 0)) {
-					String temp1 = "0" + elements;
-					CalculatorGUI.textFieldForInput.setText(temp1);
+			
+			ActionListener listener =new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String temp = CalculatorGUI.textFieldForInput.getText();
+					if((CalculatorGUI.textFieldForInput.getText().length() == 0)) {
+						String temp1 = "0" + elements;
+						CalculatorGUI.textFieldForInput.setText(temp1);
+					}
+					
+					else if (!temp.contains(".")){
+						temp += ".";
+						CalculatorGUI.textFieldForInput.setText(temp);
+					}	
 				}
-				
-				else if (!temp.contains(".")){
-					temp += ".";
-					CalculatorGUI.textFieldForInput.setText(temp);
-				}
-			}
+			};
+			this.addActionListener(listener);
+			
+			
 			
 			
 		}
@@ -86,6 +106,7 @@ public class Buttons extends JButton{
 						CalculatorGUI.calculateText +=  CalculatorGUI.textFieldForInput.getText()+elements;
 						CalculatorGUI.analyzerText +=  CalculatorGUI.textFieldForInput.getText()+","+elements+",";
 						CalculatorGUI.textFieldForInput.setText("");
+						CalculatorGUI.temporaryTextForInput ="";
 						CalculatorGUI.textFieldForTemporary.setText(CalculatorGUI.calculateText);
 					}
 				}
@@ -97,14 +118,15 @@ public class Buttons extends JButton{
 			ActionListener listener =new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if((!CalculatorGUI.textFieldForInput.getText().equals(""))){
-						CalculatorGUI.textFieldForInput.append(String.valueOf(elements));
+					if((!CalculatorGUI.textFieldForInput.getText().equals("0"))){
+						CalculatorGUI.temporaryTextForInput += elements;
+						CalculatorGUI.textFieldForInput.setText(CalculatorGUI.temporaryTextForInput);
 					}
 				}
 			};
 			this.addActionListener(listener);
 		}
-		
+		this.setFont(new Font("Arial", Font.BOLD, 25));
 	}
 	
 	public Buttons(String elements, int x, int y) {
@@ -114,10 +136,18 @@ public class Buttons extends JButton{
 		ActionListener listener =new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CalculatorGUI.textFieldForInput.append(elements);
+				if(CalculatorGUI.textFieldForInput.getText().equals("0")) {
+					CalculatorGUI.textFieldForInput.setText(elements);
+				}
+				else {
+					CalculatorGUI.temporaryTextForInput += elements;
+					CalculatorGUI.textFieldForInput.setText(CalculatorGUI.temporaryTextForInput);
+				}
+				
 			}
 		};
 		this.addActionListener(listener);
+		this.setFont(new Font("Arial", Font.BOLD, 25));
 	}
 	
 

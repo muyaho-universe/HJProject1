@@ -55,7 +55,7 @@ public class Calculation {
 		temporary = new String[size];
 		temporary = calculate.split("," );
 		for(String t: temporary) {
-			System.out.println("t: "+t);
+//			System.out.println("t: "+t);
 		}
 		
 	}
@@ -66,7 +66,7 @@ public class Calculation {
 		for(String temp : temporary) {
 			
 			if(isNum(temp)) {
-				System.out.println("num!" + temp);
+//				System.out.println("num!" + temp);
 				stack.push(temp);
 			}
 			
@@ -79,11 +79,11 @@ public class Calculation {
 					while(true) {
 						previousNum = stack.pop();
 						previousOperator = stack.pop();
-						System.out.println("previousNum: "+previousNum + " previousOperator: " + previousOperator + " getPrecedence(previousOperator): " + getPrecedence(previousOperator));
+//						System.out.println("previousNum: "+previousNum + " previousOperator: " + previousOperator + " getPrecedence(previousOperator): " + getPrecedence(previousOperator));
 						double value = Double.parseDouble(previousNum);
 						if(getPrecedence(previousOperator) == 1 ) {
 							while(!operatorStack.empty()) {
-								System.out.println(previousOperator);
+								
 								stack.push(previousOperator);
 								String pppNum = operandStack.pop();
 								String pppOperator = operatorStack.pop();
@@ -101,13 +101,27 @@ public class Calculation {
 							break;
 						}
 						else if(getPrecedence(previousOperator) == 0 ) {
-							System.out.println("0000");
+							while(!operatorStack.empty()) {
+								System.out.println(previousOperator);
+								stack.push(previousOperator);
+								String pppNum = operandStack.pop();
+								String pppOperator = operatorStack.pop();
+								switch(pppOperator) {
+									case "*": value = times(value, Double.parseDouble(pppNum));
+										break;
+									default: value = divide(value, Double.parseDouble(pppNum));
+										break;
+								}
+								
+							}
+							previousNum = value+"";
+							
 							stack.push(previousOperator);
 							stack.push(previousNum);
 							break;
 						}
 						else {
-							System.out.println("2222");
+							
 							operatorStack.push(previousOperator);
 							operandStack.push(previousNum);
 						}
@@ -145,8 +159,16 @@ public class Calculation {
 					break;
 			}
 		}
-		
 		answer = value +"";
+		String[] t = answer.split("\\.");
+		
+		
+		if(value - Integer.parseInt(t[0]) == 0.0) {
+			int i = Integer.parseInt(t[0]);
+			answer = i + "";
+		}
+		
+		
 		stack.clear();
 		return answer;
 	}

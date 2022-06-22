@@ -16,9 +16,10 @@ public class CalculatorGUI extends JFrame{
 	private int mainWidth = 400;
 	private int mainHeight = 680;
 	final private String TITLE = "Caculator";
-	static JTextArea textFieldForInput = new JTextArea();
+	static JTextField textFieldForInput = new JTextField();
 	static String calculateText = new String ();
 	static String analyzerText = new String ();
+	static String temporaryTextForInput = new String ();
 	static JTextField textFieldForTemporary =new JTextField();
 	
 	JFrame jFrame = new JFrame(TITLE);
@@ -40,8 +41,9 @@ public class CalculatorGUI extends JFrame{
 		arithmeticOperationsButtonsPanel.setLayout(null);
 		
 		
-		
-		textFieldForInput.setBounds(0, 50, mainWidth, 100);
+		textFieldForInput.setHorizontalAlignment(JTextField.RIGHT);
+		textFieldForInput.setBounds(0, 50, mainWidth-12, 100);
+		textFieldForInput.setDisabledTextColor(Color.BLACK);
 		Font font = new Font("", Font.BOLD, 30);
 		textFieldForInput.setFont(font);
 		textFieldForInput.setBorder(border);
@@ -49,7 +51,7 @@ public class CalculatorGUI extends JFrame{
 
 		textFieldForTemporary.setBounds(0,0, mainWidth, 50);
 		textFieldForTemporary.setEnabled(false);
-		
+		textFieldForTemporary.setDisabledTextColor(Color.BLUE);
 		
 		btn[0] = new Buttons(0+"");
 		btn[0].setBounds(0, 300, Buttons.buttonWidht*2, Buttons.buttonheight);
@@ -104,16 +106,16 @@ public class CalculatorGUI extends JFrame{
 		
 		
 		numberButtonsPanel.setBounds( 0, 250, mainWidth/4*3, 400);
-		numberButtonsPanel.setBackground(Color.green);
+		
 		
 		resultPrintPanel.setBounds( 0, 0, mainWidth, 150);
-		resultPrintPanel.setBackground(Color.red);
+		
 		
 		additionalButtonsPanel.setBounds( 0, 150, mainWidth/4*3, 100);
-		additionalButtonsPanel.setBackground(Color.pink);
+		
 		
 		arithmeticOperationsButtonsPanel.setBounds( 300, 150, mainWidth/4, mainHeight -150);
-		arithmeticOperationsButtonsPanel.setBackground(Color.blue);
+		
 		
 		mainContainer.setLayout(null);
 		mainContainer.add(numberButtonsPanel);
