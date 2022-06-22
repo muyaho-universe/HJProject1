@@ -16,7 +16,13 @@ public class Calculation {
 		return x - y;
 	}
 	private double divide(double x, double y) {
-		return x / y;
+		double z = 0.0;
+		try {
+			z = x /y;
+		} catch (ArithmeticException e) {
+			e.printStackTrace();
+		}
+		return z;
 	}
 	private double times(double x, double y) {
 		return x * y;
@@ -49,13 +55,13 @@ public class Calculation {
 		temporary = new String[size];
 		temporary = calculate.split("," );
 		for(String t: temporary) {
-			System.out.println(t);
+			System.out.println("t: "+t);
 		}
 		
 	}
-	
+		
 	public String calculation() {
-	
+		
 		stack.push("$");
 		for(String temp : temporary) {
 			
@@ -68,12 +74,16 @@ public class Calculation {
 				if(getPrecedence(temp) == 1) {
 					Stack<String> operatorStack = new Stack<>();
 					Stack<String> operandStack = new Stack<>();
-					do {
-						String previousNum = stack.pop();
-						String previousOperator = stack.pop();
+					String previousNum = null;
+					String previousOperator = null;
+					while(true) {
+						previousNum = stack.pop();
+						previousOperator = stack.pop();
+						System.out.println("previousNum: "+previousNum + " previousOperator: " + previousOperator + " getPrecedence(previousOperator): " + getPrecedence(previousOperator));
 						double value = Double.parseDouble(previousNum);
-						if(getPrecedence(previousOperator) == 1 || getPrecedence(previousOperator) == 0) {
+						if(getPrecedence(previousOperator) == 1 ) {
 							while(!operatorStack.empty()) {
+								System.out.println(previousOperator);
 								stack.push(previousOperator);
 								String pppNum = operandStack.pop();
 								String pppOperator = operatorStack.pop();
@@ -81,26 +91,35 @@ public class Calculation {
 									case "*": value = times(value, Double.parseDouble(pppNum));
 										break;
 									default: value = divide(value, Double.parseDouble(pppNum));
+										break;
 								}
 								
 							}
 							previousNum = value+"";
+							stack.push(previousOperator);
+							stack.push(previousNum);
+							break;
+						}
+						else if(getPrecedence(previousOperator) == 0 ) {
+							System.out.println("0000");
+							stack.push(previousOperator);
 							stack.push(previousNum);
 							break;
 						}
 						else {
+							System.out.println("2222");
 							operatorStack.push(previousOperator);
 							operandStack.push(previousNum);
 						}
-					}while(true);
 					
-					
+					}
 					stack.push(temp);
 				}
 				if(getPrecedence(temp) == 2) {
 					stack.push(temp);
 				}
 			}
+			System.out.println("size" + stack.size() + " temp " + temp);
 		}
 		
 		String previousNum = stack.pop();
