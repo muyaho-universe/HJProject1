@@ -30,7 +30,12 @@ public class CalculatorGUI extends JFrame {
 	Buttons [] btn = new Buttons [20];
 	
 	public void createFrame() {
-				
+		if(CalculatorGUI.textFieldForInput.getText().contains("E")) {
+			String[] numbers = CalculatorGUI.textFieldForInput.getText().split("E");
+			double integerPart = Double.parseDouble(numbers[0]);
+			int squares = Integer.parseInt(numbers[1]);
+			temporaryTextForInput = integerPart * Math.pow(10.0, squares) +"";
+		}
 		
 		int x = 200, y =0;
 		jFrame.setLayout(null);
